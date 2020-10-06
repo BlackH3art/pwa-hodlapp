@@ -1,38 +1,154 @@
-.App {
-  text-align: center;
+html, body, #root {
+  font: 0.9rem sans-serif;
+  background: #0a1f44;
+  color: #1e2432;
+  height: 100%;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 { 
+  font-size: 3rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h2 { 
+  font-size: 2.2rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+.main-container {
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.418) ), url('https://images.unsplash.com/photo-1494564605686-2e931f77a8e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
+  background-size: cover;
+  background-position: center;
+}
+
+.main-container {
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  flex-direction: column;
 }
 
-.App-link {
-  color: #61dafb;
+header {
+  position: absolute;
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+h1.title {
+  margin-bottom: 20px;
+}
+
+h2.price {
+  margin-top: 0;
+}
+
+section.whole-section {
+  width: 1024px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+div.form-container {
+  width: 50%;
+}
+
+label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+span.additional-info {
+  display: block;
+  font-style: 1.0rem;
+  color: #19ddff;
+  padding-left: 8px;
+  margin: 1px 0;
+  
+}
+div.table-container {
+  width: 50%;
+  outline: none;
+  padding: 20px 7%;
+  border-radius: 20px;
+  border: none;
+  margin-bottom: 5%;
+  background: rgba(250, 250, 250, 0.85);
+}
+
+div.tablehead, div.tablerow {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 10% 60% 30%;
+  border-bottom: 1px rgb(150, 142, 142) solid;
+}
+
+
+div.col-asset h2, div.col-value h2, div.col-num h2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 8px 2px;
+}
+
+div.col-asset h1, div.col-value h1, div.col-num h1 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 8px 2px 4px;
+  
+}
+
+div.col-num {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.col-value {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+span.amount {
+  margin: 0px 2px;
+  color: #5c5e63;
+}
+
+.search {
+  outline: none;
+  padding: 20px 7%;
+  border-radius: 20px;
+  width: 50%;
+  border: none;
+  margin-bottom: 5%;
+  background: rgba(250, 250, 250, 0.85);
+  
+}
+
+
+
+p {
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .search {
+      padding: 20px 15%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .city {
+      padding: 40px 20%;
   }
 }
