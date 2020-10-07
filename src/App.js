@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
 
+import FormComponent from './components/FormComponent';
+import Header from './components/Header';
+import TableRow from './components/TableRow';
+
 import { fetchPrices } from './api/fetchPrices';
 import { fetchBtcPrice } from './api/fetchPrices';
 
 import './App.css';
 
 const App = () => {
-  const [query, setQuery] = useState('');
-  const [price, setPrice] = useState({});
+
   const [btcPrice, setBtcPrice] = useState('');
 
-  // tablica i pojedyncze krypto
+  // array and single crypto
   const [cryptoItems, setCryptoItems] = useState([]);
   const [crypto, setCrypto] = useState('');
   const [cryptoAmount, setCryptoAmount] = useState('');
 
-  const search = async (e) => {
-    if(e.key === 'Enter') {
-      const data = await fetchPrices(query)
 
-      setPrice(data);
-
-      setQuery('');
-    }
-  }
 
   const fetchForBtcPrice = async () => {
     const response = await fetchBtcPrice();
@@ -43,13 +38,11 @@ const App = () => {
 
 
     let cryptoObject = {
-      name: crypto,
+      symbol: crypto,
       amount: cryptoAmount,
-      balance: cryptoAmount * price,
+      balance: (cryptoAmount * price).toFixed(2),
       price: price,
     }
-
-
 
     let newCryptoItems = [...cryptoItems];
     newCryptoItems.push(cryptoObject);
@@ -63,27 +56,19 @@ const App = () => {
 
   return (
     <>
-      <header>
-        <h1 className="title"> BTC price is now:</h1>
-        <h2 className="price"> {btcPrice} $ </h2>
-      </header>
+      <Header btcPrice={btcPrice} />
       <div className="main-container">
         <section className="whole-section">
-          <div className="form-container">
 
-            <form action="" onSubmit={handleSubmit}>
-              <label htmlFor="">What crypto are you hodling?</label> <br/>
-              <span className="additional-info">( Use symbol of a crypto like BTC for Bitcoin, ETH for Ethereum etc. )</span> <br/>
-              <input type="text" className="search" placeholder="Search..."value={crypto} onChange={(e) => setCrypto(e.target.value.toUpperCase())}  /><br/>
+          <FormComponent  
+            handleSubmit={handleSubmit}
+            crypto={crypto}
+            cryptoAmount={cryptoAmount}
+            setCrypto={(e) => setCrypto(e.target.value.toUpperCase())}
+            setCryptoAmount={(e) => setCryptoAmount(e.target.value)}
+          />
 
-              <label htmlFor=""> Amount</label> <br/>
-              <span className="additional-info">( Number )</span> <br/>
-              <input type="number" className="search" placeholder="Number"value={cryptoAmount} onChange={(e) => setCryptoAmount(e.target.value)} /><br/>
 
-              <button onClick={() => handleSubmit} onKeyPress={handleSubmit}>send</button>
-            </form>
-
-          </div>
           <div className="table-container">
             <div className="tablehead">
               <div className="col-num"></div>
@@ -95,18 +80,7 @@ const App = () => {
               </div>
             </div>
             {cryptoItems.map((item, index) => (
-              <div className="tablerow">
-                <div className="col-num">
-                  <h2> {index + 1}. </h2>
-                </div>
-                  <div className="col-asset">
-                    <h1>{item.name}</h1>
-                    <span className="amount"> ({`${item.amount} ${item.name}`})</span>
-                  </div>
-                  <div className="col-value">
-                    <h2>{item.balance}$</h2>
-                  </div>
-              </div>
+              <TableRow key={index + 1} index={index + 1} symbol={item.symbol} amount={item.amount} balance={item.balance} />
               )
             )}
 
