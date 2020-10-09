@@ -148,7 +148,58 @@ p {
       padding: 20px 15%;
   }
 
-  .city {
-      padding: 40px 20%;
+  header {
+    height: 150px;
   }
+
+  h1 { 
+    font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  }
+  
+  h2 { 
+    font-size: 1.6rem;
+  }
+
+  h1.title {
+    margin: 10px auto;
+  }
+
+  h1.price {
+    margin: 10px auto;
+  }
+
+  section.whole-section {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  div.form-container {
+    width: 90%;
+  }
+
+  div.table-container {
+    width: 90%;
+    padding: 20px 0px;
+  }
+
+  .search {
+    width: 86%;
+    padding: 15px 7%;
+  }
+
+  div.tablehead, div.tablerow {
+    width: 90%;
+    margin: 0 auto;
+    grid-template-columns: 10% 60% 30%;
+  }
+
+  div.col-asset h2, div.col-value h2, div.col-num h2 {
+    font-size: 1.1rem;
+  }
+  
+  div.col-asset h1, div.col-value h1, div.col-num h1 {
+    font-size: 1.2rem;
+  }
+
 }
