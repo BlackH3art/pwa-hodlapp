@@ -1,0 +1,16 @@
+div.no-items {
+  text-align: center;
+}
+
+h1.no-items-info {
+  font-size: 1.8rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+
+  h1.no-items-info {
+    font-size: 1.4rem;
+  }
+
+}

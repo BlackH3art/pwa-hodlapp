@@ -5,7 +5,7 @@ import React from 'react';
 
 const TableRow = (props) => {
 
-  const {index, symbol, amount, balance} = props;
+  const {index, deleteItem, symbol, amount, balance} = props;
 
   return ( 
     <div className="tablerow">
@@ -17,9 +17,14 @@ const TableRow = (props) => {
         <span className="amount"> ({`${amount} ${symbol}`})</span>
       </div>
       <div className="col-value">
-        <h2>{balance}$</h2>
+
+        <h2>{balance}$          
+          <span>
+            <button onClick={deleteItem} className="btn btn-outline-danger"> X </button>
+          </span>
+        </h2>
       </div>
-  </div>
+    </div>
   );
 }
 

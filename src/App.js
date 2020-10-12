@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 
 import FormComponent from './components/FormComponent';
 import Header from './components/Header';
-import TableRow from './components/TableRow';
+import TableComponent from './components/TableComponent';
+
 
 import { fetchPrices } from './api/fetchPrices';
 import { fetchBtcPrice } from './api/fetchPrices';
 
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const App = () => {
 
@@ -34,25 +36,22 @@ const App = () => {
     let response = await fetchPrices(crypto);
     let price = Number(response.price)
 
-    price.toFixed(2);
-
-
     let cryptoObject = {
       symbol: crypto,
       amount: cryptoAmount,
       balance: (cryptoAmount * price).toFixed(2),
-      price: price,
+      price: price.toFixed(2),
     }
 
     let newCryptoItems = [...cryptoItems];
     newCryptoItems.push(cryptoObject);
 
     setCryptoItems(newCryptoItems)
-
-    console.log(newCryptoItems);
     setCrypto('');
     setCryptoAmount('');
   }
+
+
 
   return (
     <>
@@ -68,23 +67,8 @@ const App = () => {
             setCryptoAmount={(e) => setCryptoAmount(e.target.value)}
           />
 
+          <TableComponent cryptoItems={cryptoItems} />
 
-          <div className="table-container">
-            <div className="tablehead">
-              <div className="col-num"></div>
-              <div className="col-asset">
-                <h2>Asset</h2>
-              </div>
-              <div className="col-value">
-                <h2>Value</h2>
-              </div>
-            </div>
-            {cryptoItems.map((item, index) => (
-              <TableRow key={index + 1} index={index + 1} symbol={item.symbol} amount={item.amount} balance={item.balance} />
-              )
-            )}
-
-          </div>
         </section>
 
       </div>

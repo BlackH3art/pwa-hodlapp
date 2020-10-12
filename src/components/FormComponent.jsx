@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 
 const FormComponent = (props) => {
+
+  const cryptoInputRef = useRef();
+
+  useEffect(
+    () => { 
+      cryptoInputRef.current.focus()
+    } , []
+  )
+
 
   const { handleSubmit, crypto, cryptoAmount, setCrypto, setCryptoAmount } = props;
 
@@ -13,13 +22,13 @@ const FormComponent = (props) => {
 
           <label htmlFor="">What crypto are you hodling?</label> <br/>
           <span className="additional-info">( Use symbol of a crypto like BTC for Bitcoin, ETH for Ethereum etc. )</span> <br/>
-          <input htmlFor="symbol" type="text" className="search" placeholder="Search..."value={crypto} onChange={setCrypto}  /><br/>
+          <input ref={cryptoInputRef} htmlFor="symbol" type="text" className="search" placeholder="Search..."value={crypto} onChange={setCrypto}  /><br/>
 
           <label htmlFor=""> Amount</label> <br/>
           <span className="additional-info">( Number )</span> <br/>
           <input htmlFor="amount" type="number" className="search" placeholder="Number"value={cryptoAmount} onChange={setCryptoAmount} /><br/>
 
-          <button onClick={() => handleSubmit} onKeyPress={handleSubmit}>send</button>
+          <button className="btn btn-primary" onClick={() => handleSubmit} onKeyPress={handleSubmit}>add</button>
         </form>
 
       </div> 
