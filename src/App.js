@@ -51,12 +51,20 @@ const App = () => {
     setCryptoAmount('');
   }
 
+  const handleDelete = (itemToDelete) => {
+
+    let newCryptoItems = cryptoItems.filter((items) => {
+      return items !== itemToDelete;
+    });
+
+    setCryptoItems(newCryptoItems)
+  }
 
 
   return (
     <>
-      <Header btcPrice={btcPrice} />
       <div className="main-container">
+        <Header btcPrice={btcPrice} />
         <section className="whole-section">
 
           <FormComponent  
@@ -67,7 +75,7 @@ const App = () => {
             setCryptoAmount={(e) => setCryptoAmount(e.target.value)}
           />
 
-          <TableComponent cryptoItems={cryptoItems} />
+          <TableComponent cryptoItems={cryptoItems} deleteItem={handleDelete.bind(this)} />
 
         </section>
 

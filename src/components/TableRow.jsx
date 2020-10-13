@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons'; 
+
 
 
 
@@ -18,11 +21,17 @@ const TableRow = (props) => {
       </div>
       <div className="col-value">
 
-        <h2>{balance}$          
           <span>
-            <button onClick={deleteItem} className="btn btn-outline-danger"> X </button>
+            <button onClick={deleteItem} className="btn btn-sm btn-outline-danger" alt="delete">
+              <FontAwesomeIcon icon={faTrashAlt} /> 
+            </button>
+            <button className="btn btn-sm btn-outline-warning" alt="edit">
+              <FontAwesomeIcon icon={faPen} /> 
+            </button>
           </span>
-        </h2>
+
+        <h2>{balance}$</h2>
+
       </div>
     </div>
   );

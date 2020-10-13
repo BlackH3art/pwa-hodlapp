@@ -5,14 +5,12 @@ import TableRow from './TableRow';
 import TableHead from './TableHead';
 
 
-const TableComponent = ({cryptoItems}) => {
+const TableComponent = ({cryptoItems, deleteItem}) => {
   
-  const handleDelete = (e) => {
-    console.log('click');
-  }
+
 
   const addedItems = cryptoItems.length === 0 ? <TableNoItems /> : cryptoItems.map((item, index) => (
-    <TableRow key={index + 1} deleteItem={handleDelete} index={index + 1} symbol={item.symbol} amount={item.amount} balance={item.balance} />
+    <TableRow key={index + 1} deleteItem={deleteItem.bind(null, item)} index={index + 1} symbol={item.symbol} amount={item.amount} balance={item.balance} />
     )
   )
 
