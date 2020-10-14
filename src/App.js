@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import EditComponent from './components/EditComponent';
 import FormComponent from './components/FormComponent';
 import Header from './components/Header';
 import TableComponent from './components/TableComponent';
@@ -19,6 +20,8 @@ const App = () => {
   const [cryptoItems, setCryptoItems] = useState([]);
   const [crypto, setCrypto] = useState('');
   const [cryptoAmount, setCryptoAmount] = useState('');
+
+  const [editComponent, setEditComponent] = useState(false)
 
 
 
@@ -60,6 +63,13 @@ const App = () => {
     setCryptoItems(newCryptoItems)
   }
 
+  const toggleEditComponent = () => {
+
+    setEditComponent(!editComponent)
+    console.log(editComponent ,'click edit');
+  }
+
+  
 
   return (
     <>
@@ -75,7 +85,10 @@ const App = () => {
             setCryptoAmount={(e) => setCryptoAmount(e.target.value)}
           />
 
-          <TableComponent cryptoItems={cryptoItems} deleteItem={handleDelete.bind(this)} />
+          <TableComponent cryptoItems={cryptoItems} toggleEditComponent={toggleEditComponent} deleteItem={handleDelete.bind(this)} />
+
+          {/* <EditComponent handleSubmit={handleSubmit} /> */}
+
 
         </section>
 

@@ -1,0 +1,10 @@
+div.edit-popup {
+  position: absolute;
+  height: 300px;
+  width: 600px;
+  background-color: lightblue;
+}
+
+div.active-field {
+  background-color: lightgreen;
+}

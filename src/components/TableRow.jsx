@@ -8,7 +8,7 @@ import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
 
 const TableRow = (props) => {
 
-  const {index, deleteItem, symbol, amount, balance} = props;
+  const {index, toggleEditComponent, deleteItem, symbol, amount, balance} = props;
 
   return ( 
     <div className="tablerow">
@@ -25,7 +25,7 @@ const TableRow = (props) => {
             <button onClick={deleteItem} className="btn btn-sm btn-outline-danger" alt="delete">
               <FontAwesomeIcon icon={faTrashAlt} /> 
             </button>
-            <button className="btn btn-sm btn-outline-warning" alt="edit">
+            <button onClick={toggleEditComponent} className="btn btn-sm btn-outline-warning" alt="edit">
               <FontAwesomeIcon icon={faPen} /> 
             </button>
           </span>
