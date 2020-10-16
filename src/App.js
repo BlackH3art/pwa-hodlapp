@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import EditComponent from './components/EditComponent';
 import FormComponent from './components/FormComponent';
@@ -12,6 +12,14 @@ import { fetchBtcPrice } from './api/fetchPrices';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
+
+// const dataArray = [
+//   {symbol: "BTC", amount: "2", balance: "22730.22", price: "11365.11"},
+//   {symbol: "ETH", amount: "2", balance: "749.32", price: "374.66"},
+//   {symbol: "CHZ", amount: "41201", balance: "436.85", price: "0.01"}
+// ]
+
+
 const App = () => {
 
   const [btcPrice, setBtcPrice] = useState('');
@@ -22,8 +30,7 @@ const App = () => {
   const [cryptoAmount, setCryptoAmount] = useState('');
 
   const [editComponent, setEditComponent] = useState(false)
-
-
+  const [editingItem, setEditingItem] = useState({})
 
   const fetchForBtcPrice = async () => {
     const response = await fetchBtcPrice();
@@ -31,7 +38,11 @@ const App = () => {
     
     setBtcPrice(currentBtcPrice.toFixed(2))
   }
-  fetchForBtcPrice()
+  
+  useEffect(() => {
+    fetchForBtcPrice()
+  }, [])
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -54,7 +65,34 @@ const App = () => {
     setCryptoAmount('');
   }
 
+  const findItem = (itemToLookFor) => {
+    let item = cryptoItems.find((itm) => {
+      return itm === itemToLookFor
+    })
+    return item
+  }
+
+  const handleEditItem = async () => {
+
+    let response = await fetchPrices(crypto);
+    let price = Number(response.price)
+    let indexOfEditingItem = cryptoItems.indexOf(editingItem)
+
+    cryptoItems[indexOfEditingItem] = {
+      symbol: crypto,
+      amount: cryptoAmount,
+      balance: (cryptoAmount * price).toFixed(2),
+      price: price.toFixed(2),
+    }
+
+    setCrypto('');
+    setCryptoAmount('');
+    setEditingItem('')
+    toggleEditComponent();
+  }
+
   const handleDelete = (itemToDelete) => {
+
 
     let newCryptoItems = cryptoItems.filter((items) => {
       return items !== itemToDelete;
@@ -63,13 +101,23 @@ const App = () => {
     setCryptoItems(newCryptoItems)
   }
 
-  const toggleEditComponent = () => {
-
+  const toggleEditComponent = (itemToEdit) => {
     setEditComponent(!editComponent)
-    console.log(editComponent ,'click edit');
+    let item = findItem(itemToEdit)
+    setEditingItem(item)
   }
 
-  
+  const showEditComponent = editComponent 
+    ? <EditComponent 
+        handleEditItem={handleEditItem} 
+        editingItem={editingItem}
+        crypto={crypto}
+        cryptoAmount={cryptoAmount}
+        setCrypto={(e) => setCrypto(e.target.value.toUpperCase())}
+        setCryptoAmount={(e) => setCryptoAmount(e.target.value)}
+        cancel={() => setEditComponent(!editComponent)}
+      /> 
+    :  null;
 
   return (
     <>
@@ -85,10 +133,13 @@ const App = () => {
             setCryptoAmount={(e) => setCryptoAmount(e.target.value)}
           />
 
-          <TableComponent cryptoItems={cryptoItems} toggleEditComponent={toggleEditComponent} deleteItem={handleDelete.bind(this)} />
+          <TableComponent 
+            cryptoItems={cryptoItems} 
+            deleteItem={handleDelete.bind(this)} 
+            toggleAndGetEditItem={toggleEditComponent.bind(this)}
+          />
 
-          {/* <EditComponent handleSubmit={handleSubmit} /> */}
-
+          {showEditComponent}
 
         </section>
 
