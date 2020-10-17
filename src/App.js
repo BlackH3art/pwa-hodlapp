@@ -13,11 +13,11 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
-// const dataArray = [
-//   {symbol: "BTC", amount: "2", balance: "22730.22", price: "11365.11"},
-//   {symbol: "ETH", amount: "2", balance: "749.32", price: "374.66"},
-//   {symbol: "CHZ", amount: "41201", balance: "436.85", price: "0.01"}
-// ]
+const dataArray = [
+  {symbol: "BTC", amount: "2", balance: "22730.22", price: "11365.11"},
+  {symbol: "ETH", amount: "2", balance: "749.32", price: "374.66"},
+  {symbol: "CHZ", amount: "41201", balance: "436.85", price: "0.01"}
+]
 
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
   const [btcPrice, setBtcPrice] = useState('');
 
   // array and single crypto
-  const [cryptoItems, setCryptoItems] = useState([]);
+  const [cryptoItems, setCryptoItems] = useState(dataArray);
   const [crypto, setCrypto] = useState('');
   const [cryptoAmount, setCryptoAmount] = useState('');
 
@@ -107,6 +107,12 @@ const App = () => {
     setEditingItem(item)
   }
 
+  const cancelEdit = () => {
+    setEditComponent(!editComponent);
+    setCrypto('');
+    setCryptoAmount('');
+  }
+
   const showEditComponent = editComponent 
     ? <EditComponent 
         handleEditItem={handleEditItem} 
@@ -115,7 +121,7 @@ const App = () => {
         cryptoAmount={cryptoAmount}
         setCrypto={(e) => setCrypto(e.target.value.toUpperCase())}
         setCryptoAmount={(e) => setCryptoAmount(e.target.value)}
-        cancel={() => setEditComponent(!editComponent)}
+        cancel={cancelEdit}
       /> 
     :  null;
 
@@ -127,8 +133,8 @@ const App = () => {
 
           <FormComponent  
             handleSubmit={handleSubmit}
-            crypto={crypto}
-            cryptoAmount={cryptoAmount}
+            crypto={editComponent ? '' : crypto}
+            cryptoAmount={editComponent ? '' : cryptoAmount}
             setCrypto={(e) => setCrypto(e.target.value.toUpperCase())}
             setCryptoAmount={(e) => setCryptoAmount(e.target.value)}
           />

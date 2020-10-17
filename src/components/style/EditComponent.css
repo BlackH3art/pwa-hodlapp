@@ -2,9 +2,43 @@ div.edit-popup {
   position: absolute;
   height: 300px;
   width: 600px;
-  background-color: lightblue;
+  background: rgba(250, 197, 7, 0.97);
+  border: 3px solid #ffc107;
+  border-radius: 20px;
+}
+
+div.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+div.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 auto 10px;
+  width: 30%;
+}
+
+div.input-container label {
+  margin-top: 10px;
 }
 
 div.active-field {
   background-color: lightgreen;
+  border-radius: 20px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  div.edit-popup {
+    width: 80%;
+    height: 260px;
+  }
+
+  div.button-container {
+    width: 60%;
+  }
 }
