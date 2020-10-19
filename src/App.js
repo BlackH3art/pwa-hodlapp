@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import EditComponent from './components/EditComponent';
 import FormComponent from './components/FormComponent';
@@ -44,7 +44,7 @@ const App = () => {
   }, [])
   
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault()
     
     let response = await fetchPrices(crypto);
@@ -63,16 +63,22 @@ const App = () => {
     setCryptoItems(newCryptoItems)
     setCrypto('');
     setCryptoAmount('');
-  }
+  }, [crypto, cryptoAmount, cryptoItems])
 
-  const findItem = (itemToLookFor) => {
+  const findItem = useCallback((itemToLookFor) => {
     let item = cryptoItems.find((itm) => {
       return itm === itemToLookFor
     })
     return item
-  }
+  }, [cryptoItems])
 
-  const handleEditItem = async () => {
+  const toggleEditComponent = useCallback((itemToEdit) => {
+    setEditComponent(!editComponent)
+    let item = findItem(itemToEdit)
+    setEditingItem(item)
+  }, [editComponent, findItem])
+
+  const handleEditItem = useCallback(async () => {
 
     let response = await fetchPrices(crypto);
     let price = Number(response.price)
@@ -89,9 +95,9 @@ const App = () => {
     setCryptoAmount('');
     setEditingItem('')
     toggleEditComponent();
-  }
+  }, [crypto, cryptoAmount, cryptoItems, editingItem, toggleEditComponent])
 
-  const handleDelete = (itemToDelete) => {
+  const handleDelete = useCallback((itemToDelete) => {
 
 
     let newCryptoItems = cryptoItems.filter((items) => {
@@ -99,19 +105,13 @@ const App = () => {
     });
 
     setCryptoItems(newCryptoItems)
-  }
+  }, [cryptoItems])
 
-  const toggleEditComponent = (itemToEdit) => {
-    setEditComponent(!editComponent)
-    let item = findItem(itemToEdit)
-    setEditingItem(item)
-  }
-
-  const cancelEdit = () => {
+  const cancelEdit = useCallback(() => {
     setEditComponent(!editComponent);
     setCrypto('');
     setCryptoAmount('');
-  }
+  }, [editComponent])
 
   const showEditComponent = editComponent 
     ? <EditComponent 
