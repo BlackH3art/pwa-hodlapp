@@ -1,9 +1,10 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const TableHead = () => {
   return ( 
     <>
-      <div className="tablehead">
+      <motion.div className="tablehead" layout>
         <div className="col-num"></div>
         <div className="col-asset">
           <h2>Asset</h2>
@@ -11,7 +12,7 @@ const TableHead = () => {
         <div className="col-value">
           <h2>Value</h2>
         </div>
-      </div>
+      </motion.div>
     </>
    );
 }

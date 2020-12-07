@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons'; 
 
@@ -11,7 +12,13 @@ const TableRow = (props) => {
   const {index, deleteItem, toggleAndGetEditItem, symbol, amount, balance} = props;
 
   return ( 
-    <div className="tablerow">
+    <motion.div className="tablerow" layout
+      key={index}
+      initial={{ x: -100, opacity: 0}}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{}}
+    >
       <div className="col-num">
         <h2> {index}. </h2>
       </div>
@@ -33,7 +40,7 @@ const TableRow = (props) => {
         <h2>{balance}$</h2>
 
       </div>
-    </div>
+    </motion.div>
   );
 }
 

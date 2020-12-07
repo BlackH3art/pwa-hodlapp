@@ -1,4 +1,5 @@
 import React from 'react';
+import { AnimateSharedLayout , motion} from 'framer-motion';
 
 import TableNoItems from './TableNoItems';
 import TableRow from './TableRow';
@@ -23,10 +24,12 @@ const TableComponent = ({ cryptoItems, deleteItem, toggleAndGetEditItem }) => {
 
   return ( 
     <>
-      <div className="table-container">
+      <AnimateSharedLayout>
+      <motion.div className="table-container" layout>
         {tableHead}
         {addedItems}
-      </div>
+      </motion.div>
+      </AnimateSharedLayout>
     </>
    );
 }

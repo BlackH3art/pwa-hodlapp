@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { AnimatePresence } from 'framer-motion'
 
 import EditComponent from './components/EditComponent';
 import FormComponent from './components/FormComponent';
@@ -115,6 +116,7 @@ const App = () => {
 
   const showEditComponent = editComponent 
     ? <EditComponent 
+        isEditComponentActive={editComponent}
         handleEditItem={handleEditItem} 
         editingItem={editingItem}
         crypto={crypto}
@@ -127,6 +129,8 @@ const App = () => {
 
   return (
     <>
+      <AnimatePresence>
+
       <div className="main-container">
         <Header btcPrice={btcPrice} />
         <section className="whole-section">
@@ -150,6 +154,8 @@ const App = () => {
         </section>
 
       </div>
+
+      </AnimatePresence>
     </>
   );
 };
